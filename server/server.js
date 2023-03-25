@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 
 //Models
 const userSchema = require("./models/userSchema");
+const paymentSchema = require("./models/paymentSchema");
+
 
 
 require("dotenv").config();
@@ -32,10 +34,13 @@ mongoose.connection.once("open", () => {
 
 //Routes
 const userRouter = require("./routes/UserRouter.js");
+const payRoute = require("./routes/paymentRouter");
+
 
 
 //app use
 app.use("/user", userRouter);
+app.use("/payment",payRoute);
 
 
 app.listen(port, () => {
