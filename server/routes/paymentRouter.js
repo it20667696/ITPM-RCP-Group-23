@@ -72,21 +72,9 @@ router.get("/:id",async (req,res) =>{
 
 //GET ALL PAYMENT
 
-
-router.get("/all",async (req,res) =>{
-      const fullname = req.query.name;
-      const mobile   = req.quary.mobile;
+router.get("/",async (req,res) =>{
     try{
-        let paymentRoute;
-         if(fullname){
-            paymentRoute = await paymentSchema.find({fullname})
-         }else if(mobile){
-            paymentRoute = await paymentSchema.find({mobile:{
-                $in:[mobile]
-            }})
-         }else{
-            paymentRoute = await paymentSchema.find();
-         }
+        let paymentRoute = await paymentSchema.find();
          res.status(200).json(paymentRoute);
     }catch(err){
         res.status(500).json(err);
