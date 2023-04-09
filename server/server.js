@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 
 //Models
 const userSchema = require("./models/userSchema");
-
+const inventorySchema = require("./models/inventorySchema");
 
 require("dotenv").config();
 
@@ -32,10 +32,12 @@ mongoose.connection.once("open", () => {
 
 //Routes
 const userRouter = require("./routes/UserRouter.js");
-
+const inventoryRouter = require("./routes/InventoryRouter.js");
 
 //app use
 app.use("/user", userRouter);
+app.use("/inventory", inventoryRouter);
+
 
 
 app.listen(port, () => {
