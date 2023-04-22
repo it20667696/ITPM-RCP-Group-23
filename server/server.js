@@ -32,10 +32,13 @@ mongoose.connection.once("open", () => {
 
 //Routes
 const userRouter = require("./routes/UserRouter.js");
-
+const CollectReqRouter = require("./routes/CollectReqRouter.js");
+const SupplierRouter = require("./routes/SupplierRouter.js");
 
 //app use
 app.use("/user", userRouter);
+app.use("/CollectReq", CollectReqRouter);
+app.use("/supplier", SupplierRouter); 
 
 
 app.listen(port, () => {
