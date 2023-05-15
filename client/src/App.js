@@ -11,6 +11,7 @@ import Customers from "scenes/customers";
 import Transactions from "scenes/transactions";
 import Overview from "scenes/overview";
 import Admin from "scenes/admin";
+import LoginPage from "scenes/LoginPage/LoginPage";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -21,8 +22,12 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
+            <Route path="/" element={<LoginPage />} />
             <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route
+                path="/layout"
+                element={<Navigate to="/dashboard" replace />}
+              />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />
               <Route path="/customers" element={<Customers />} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -10,8 +10,10 @@ import {
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setMode } from "state";
 import profileImage from "assets/Profile.jpg";
+import axios from "axios";
 import {
   AppBar,
   Button,
@@ -23,16 +25,63 @@ import {
   Menu,
   MenuItem,
   useTheme,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const [userData, setUserData] = useState({});
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
+
+  const handleLogout = () => {
+    navigate("/login");
+  };
+
   const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const handleClose = () => {
+    setAnchorEl(null);
+    handleLogout();
+  };
+  const handleCloseDropdown = () => {
+    handleCloseDialog();
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // get JWT token from local storage
+
+    axios
+      .get(`http://localhost:5000/login/64626d95208980a54e6bdd56`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // include JWT token in headers
+        },
+      })
+      .then((response) => {
+        setUserData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <AppBar
@@ -114,13 +163,13 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                   fontSize="0.85rem"
                   sx={{ color: theme.palette.grey[100] }}
                 >
-                  {user.name}
+                  {userData.username}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
                   sx={{ color: theme.palette.grey[100] }}
                 >
-                  {user.occupation}
+                  {userData.email}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
@@ -133,9 +182,23 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
-              <MenuItem onClick={handleClose}>Client Page</MenuItem>
+              <MenuItem onClick={handleOpenDialog}>Log Out</MenuItem>
+              <MenuItem>Client Page</MenuItem>
             </Menu>
+            <Dialog open={open} onClose={handleCloseDialog}>
+              <DialogTitle>Sign Out From Account</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Are you sure you want to Sign Out from your account?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseDropdown}>Cancel</Button>
+                <Button onClick={handleClose} color="error" autoFocus>
+                  Sign Out
+                </Button>
+              </DialogActions>
+            </Dialog>
           </FlexBetween>
         </FlexBetween>
       </Toolbar>
