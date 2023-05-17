@@ -15,6 +15,9 @@ import Transactions from "scenes/transactions";
 import Overview from "scenes/overview";
 import Admin from "scenes/admin";
 import LoginPage from "scenes/LoginPage/LoginPage";
+import UpdateProductPage from "scenes/products/UpdateProductPage";
+import ViewProductPage from "scenes/products/ViewProductPage";
+import AddProductPage from "scenes/products/AddProductPage";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -46,6 +49,12 @@ function App() {
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/overview" element={<Overview />} />
               <Route path="/admin" element={<Admin />} />
+              <Route
+                path="/update-product/:id"
+                element={<UpdateProductPage />}
+              />
+              <Route path="/products/:id/view" element={<ViewProductPage />} />
+              <Route path="/addProduct" element={<AddProductPage />} />
             </Route>
           </Routes>
         </ThemeProvider>
