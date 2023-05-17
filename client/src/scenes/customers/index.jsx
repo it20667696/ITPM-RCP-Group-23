@@ -11,11 +11,7 @@ import {
   DialogTitle,
   Stack,
 } from "@mui/material";
-import {
-  useGetCustomersQuery,
-  useCreateCustomerMutation,
-  useDeleteCustomerMutation,
-} from "state/api";
+import { useGetCustomersQuery, useDeleteCustomerMutation } from "state/api";
 import Header from "components/Header";
 import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
@@ -28,7 +24,6 @@ const Customers = () => {
   const { data, isLoading } = useGetCustomersQuery();
   console.log("data", data);
 
-  const [createCustomer] = useCreateCustomerMutation();
   const [deleteCustomer] = useDeleteCustomerMutation();
   const [selectedRows, setSelectedRows] = useState([]);
   const [open, setOpen] = useState(false);
