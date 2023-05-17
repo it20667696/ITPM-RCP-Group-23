@@ -1,0 +1,10 @@
+.update-customer-page {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.update-customer-page-fields-text {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

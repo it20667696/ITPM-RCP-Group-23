@@ -28,11 +28,16 @@ class SignIN extends Component {
       .post("http://localhost:5000/login/login", data)
       .then((res) => {
         console.log(res);
-        localStorage.clear();
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        this.setState({ showSuccessAlert: true });
-        window.location.href = "/layout";
+        if (res.data.token) {
+          localStorage.clear();
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          this.setState({ showSuccessAlert: true });
+          window.location.href = "/layout";
+        } else {
+          this.setState({ showErrorAlert: true });
+        }
       })
+
       .catch((err) => {
         console.log(err);
         this.setState({ showErrorAlert: true });

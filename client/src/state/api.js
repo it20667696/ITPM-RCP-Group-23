@@ -1,7 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const baseQuery = fetchBaseQuery({
+  baseUrl: "http://localhost:5000",
+  prepareHeaders: (headers, { getState }) => {
+    // Retrieve the token from the local storage
+    const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
+  baseQuery,
   reducerPath: "adminApi",
   tagTypes: [
     "User",
@@ -15,8 +27,12 @@ export const api = createApi({
     "Dashboard",
   ],
   endpoints: (build) => ({
+    // getUser: build.query({
+    //   query: (id) => `general/user/${id}`,
+    //   providesTags: ["User"],
+    // }),
     getUser: build.query({
-      query: (id) => `general/user/${id}`,
+      query: (id) => `login/${id}`,
       providesTags: ["User"],
     }),
     getProducts: build.query({
@@ -51,6 +67,128 @@ export const api = createApi({
       query: () => "general/dashboard",
       providesTags: ["Dashboard"],
     }),
+
+    getProductById: build.query({
+      query: (id) => `client/getProductById/${id}`,
+      providesTags: (result, error, id) => [{ type: "Products", id }],
+    }),
+
+    getCustomerById: build.query({
+      query: (id) => `client/getCustomerById/${id}`,
+      providesTags: (result, error, id) => [{ type: "Customers", id }],
+    }),
+
+    getTransactionById: build.query({
+      query: (id) => `client/getTransactionById/${id}`,
+      providesTags: (result, error, id) => [{ type: "Transactions", id }],
+    }),
+
+    createProduct: build.mutation({
+      query: (newProduct) => ({
+        url: "client/addProduct",
+        method: "POST",
+        body: newProduct,
+      }),
+      invalidatesTags: ["Products"],
+    }),
+
+    createCustomer: build.mutation({
+      query: (newCustomer) => ({
+        url: "client/addCustomer",
+        method: "POST",
+        body: newCustomer,
+      }),
+      invalidatesTags: ["Customers"],
+    }),
+
+    createTransaction: build.mutation({
+      query: (newTransaction) => ({
+        url: "client/addTransaction",
+        method: "POST",
+        body: newTransaction,
+      }),
+      invalidatesTags: ["Transactions"],
+    }),
+
+    deleteProduct: build.mutation({
+      query: (id) => ({
+        url: `client/deleteProduct/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Products"],
+    }),
+
+    deleteCustomer: build.mutation({
+      query: (id) => ({
+        url: `client/deleteCustomer/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Customers"],
+    }),
+
+    deleteTransaction: build.mutation({
+      query: (id) => ({
+        url: `client/deleteTransaction/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Transactions"],
+    }),
+
+    // Additional CRUD endpoints...
+
+    updateProduct: build.mutation({
+      query: ({ id, updatedProduct }) => ({
+        url: `client/updateProduct/${id}`,
+        method: "PUT",
+        body: updatedProduct,
+      }),
+      invalidatesTags: ["Products"],
+    }),
+
+    updateCustomer: build.mutation({
+      query: ({ id, updatedCustomer }) => ({
+        url: `client/updateCustomer/${id}`,
+        method: "PUT",
+        body: updatedCustomer,
+      }),
+      invalidatesTags: ["Customers"],
+    }),
+
+    updateTransaction: build.mutation({
+      query: ({ id, updatedTransaction }) => ({
+        url: `client/updateTransaction/${id}`,
+        method: "PUT",
+        body: updatedTransaction,
+      }),
+      invalidatesTags: ["Transactions"],
+    }),
+
+    patchProduct: build.mutation({
+      query: ({ id, updatedFields }) => ({
+        url: `client/patchProduct/${id}`,
+        method: "PATCH",
+        body: updatedFields,
+      }),
+      invalidatesTags: ["Products"],
+    }),
+
+    patchCustomer: build.mutation({
+      query: ({ id, updatedFields }) => ({
+        url: `client/patchCustomer/${id}`,
+        method: "PATCH",
+        body: updatedFields,
+      }),
+      invalidatesTags: ["Customers"],
+    }),
+
+    patchTransaction: build.mutation({
+      query: ({ id, updatedFields }) => ({
+        url: `client/patchTransaction/${id}`,
+        method: "PATCH",
+        body: updatedFields,
+      }),
+      invalidatesTags: ["Transactions"],
+    }),
   }),
 });
 
@@ -63,4 +201,19 @@ export const {
   useGetAdminsQuery,
   useGetUserPerformanceQuery,
   useGetDashboardQuery,
+  useGetProductByIdQuery,
+  useGetCustomerByIdQuery,
+  useGetTransactionByIdQuery,
+  useCreateProductMutation,
+  useCreateCustomerMutation,
+  useCreateTransactionMutation,
+  useDeleteProductMutation,
+  useDeleteCustomerMutation,
+  useDeleteTransactionMutation,
+  useUpdateProductMutation,
+  useUpdateCustomerMutation,
+  useUpdateTransactionMutation,
+  usePatchProductMutation,
+  usePatchCustomerMutation,
+  usePatchTransactionMutation,
 } = api;

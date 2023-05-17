@@ -37,7 +37,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
 
   const [open, setOpen] = useState(false);
 
@@ -53,7 +53,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const isOpen = Boolean(anchorEl);
 
   const handleLogout = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
@@ -66,22 +66,22 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token"); // get JWT token from local storage
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token"); // get JWT token from local storage
 
-    axios
-      .get(`http://localhost:5000/login/64626d95208980a54e6bdd56`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // include JWT token in headers
-        },
-      })
-      .then((response) => {
-        setUserData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  //   axios
+  //     .get(`http://localhost:5000/login/64626d95208980a54e6bdd56`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`, // include JWT token in headers
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setUserData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   return (
     <AppBar
@@ -163,13 +163,13 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                   fontSize="0.85rem"
                   sx={{ color: theme.palette.grey[100] }}
                 >
-                  {userData.username}
+                  {user.username}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
                   sx={{ color: theme.palette.grey[100] }}
                 >
-                  {userData.email}
+                  {user.email}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined

@@ -8,6 +8,9 @@ import Layout from "scenes/layout";
 import Dashboard from "scenes/dashboard";
 import Products from "scenes/products";
 import Customers from "scenes/customers";
+import UpdateCustomerPage from "scenes/customers/UpdateCustomerPage";
+import ViewCustomerPage from "scenes/customers/ViewCustomerPage";
+import AddCustomerPage from "scenes/customers/AddCustomerPage";
 import Transactions from "scenes/transactions";
 import Overview from "scenes/overview";
 import Admin from "scenes/admin";
@@ -31,6 +34,15 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />
               <Route path="/customers" element={<Customers />} />
+              <Route
+                path="/customers/:id/update"
+                element={<UpdateCustomerPage />}
+              />
+              <Route
+                path="/customers/:id/view"
+                element={<ViewCustomerPage />}
+              />
+              <Route path="/addCustomer" element={<AddCustomerPage />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/overview" element={<Overview />} />
               <Route path="/admin" element={<Admin />} />
