@@ -1,15 +1,79 @@
-import React from "react";
-import { Box, useTheme } from "@mui/material";
-import { useGetCustomersQuery } from "state/api";
+import React, { useState } from "react";
+import {
+  Box,
+  useTheme,
+  IconButton,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Stack,
+} from "@mui/material";
+import {
+  useGetCustomersQuery,
+  useCreateCustomerMutation,
+  useDeleteCustomerMutation,
+} from "state/api";
 import Header from "components/Header";
 import { DataGrid } from "@mui/x-data-grid";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useNavigate } from "react-router-dom";
 
 const Customers = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetCustomersQuery();
   console.log("data", data);
 
+  const [createCustomer] = useCreateCustomerMutation();
+  const [deleteCustomer] = useDeleteCustomerMutation();
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleOpenDialog = () => {
+    setOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
+
+  const handleCreate = () => {
+    navigate("/addCustomer");
+  };
+
+  const handleUpdate = async (id, rowData) => {
+    navigate(`/customers/${id}/update`, { state: rowData });
+  };
+
+  const handleViewCustomer = (id) => {
+    navigate(`/customers/${id}/view`);
+  };
+
+  const handleDelete = async (selectedIds) => {
+    try {
+      handleOpenDialog();
+      await deleteCustomer(selectedIds);
+      setSelectedRows([]);
+    } catch (error) {
+      console.error("Error deleting customers:", error);
+    }
+  };
+
   const columns = [
+    {
+      field: "selection",
+      headerName: " ",
+      headerClassName: "selection-header",
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      flex: 0.2,
+    },
     {
       field: "_id",
       headerName: "ID",
@@ -18,12 +82,12 @@ const Customers = () => {
     {
       field: "name",
       headerName: "Name",
-      flex: 0.5,
+      flex: 0.6,
     },
     {
       field: "email",
       headerName: "Email",
-      flex: 1,
+      flex: 0.8,
     },
     {
       field: "phoneNumber",
@@ -41,12 +105,42 @@ const Customers = () => {
     {
       field: "occupation",
       headerName: "Occupation",
-      flex: 1,
+      flex: 0.6,
     },
     {
       field: "role",
       headerName: "Role",
       flex: 0.5,
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      flex: 0.6,
+      renderCell: (params) => (
+        <div>
+          <IconButton
+            color="success"
+            component="span"
+            onClick={() => handleViewCustomer(params.id)}
+          >
+            <VisibilityIcon />
+          </IconButton>
+          <IconButton
+            color="secondary"
+            component="span"
+            onClick={() => handleUpdate(params.id, params.row)}
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            color="error"
+            component="span"
+            onClick={() => handleDelete(params.id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      ),
     },
   ];
 
@@ -81,6 +175,20 @@ const Customers = () => {
           },
         }}
       >
+        <Stack>
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{
+              marginBottom: "20px",
+              width: "200px",
+            }}
+            onClick={handleCreate}
+          >
+            Add Customer
+          </Button>
+        </Stack>
+
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}
@@ -88,6 +196,22 @@ const Customers = () => {
           columns={columns}
         />
       </Box>
+      <div>
+        <Dialog open={open} onClose={handleCloseDialog}>
+          <DialogTitle>Delete Customer</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete customer?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog}>Cancel</Button>
+            <Button onClick={handleCloseDialog} color="error" autoFocus>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </Box>
   );
 };

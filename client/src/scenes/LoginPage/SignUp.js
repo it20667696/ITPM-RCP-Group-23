@@ -31,7 +31,7 @@ class SignUp extends Component {
         localStorage.clear();
         localStorage.setItem("token", JSON.stringify(res.data.token));
         this.setState({ showSuccessAlert: true });
-        window.location.href = "/login";
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log(err);
