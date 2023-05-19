@@ -12,6 +12,9 @@ import Transactions from "scenes/transactions";
 import Overview from "scenes/overview";
 import Admin from "scenes/admin";
 import LoginPage from "scenes/LoginPage/LoginPage";
+import SelectSup from "scenes/suppliers/select_sup";
+import Supplier_Dash from "scenes/suppliers/supplier_dash";
+import CreateReq from "scenes/suppliers/create_req";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -34,6 +37,9 @@ function App() {
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/overview" element={<Overview />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/selectsup" element={<SelectSup />} />
+              <Route path="/supplierdash" element={<Supplier_Dash />} />
+              <Route path="/createreq" element={<CreateReq />} />
             </Route>
           </Routes>
         </ThemeProvider>
