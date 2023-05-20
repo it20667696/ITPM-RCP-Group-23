@@ -8,6 +8,10 @@ const UpdateProductPage = () => {
   const navigate = useNavigate();
 
   const { data: product, isLoading } = useGetProductByIdQuery(id);
+
+
+ 
+
   const [updatedProduct, setUpdatedProduct] = useState({
     name: "",
     price: 0,
@@ -21,6 +25,7 @@ const UpdateProductPage = () => {
   const productData = location.state?.productData;
 
   useEffect(() => {
+    
     if (productData) {
       setUpdatedProduct(productData);
     }

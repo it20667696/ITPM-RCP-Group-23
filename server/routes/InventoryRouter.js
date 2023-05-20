@@ -145,21 +145,31 @@ router.get("/id", function (req, res, next) {
       res.status(400).json({ success: false, message: e.message, payload: {} });
     });
 });
-
-router.delete("/itemlist/delete",(req, res, next) => {
-  inventorySchema
-    .updateOne({ product_id: req.query.product_id }, { $set: { status: false } })
-    .then((result) => {
-      res.json({
-        success: true,
-        message: "inserted sucessful",
-        payload: {},
-      });
-    })
-    .catch((e) => {
-      res.status(400).json({ success: false, message: e.message, payload: {} });
-    });
+router.delete("/delete/:id", async (req,res) => {
+  try{
+      // const payment = await paymentSchema.findById(req.params.id)
+       console.log('>>>',req.params.id)
+         await inventorySchema.findByIdAndDelete(req.params.id);
+          res.status(200).json("Payment has been deleted");
+       
+  }catch(err){
+     res.status(500).json(err); 
+  }
 });
+// router.delete("/itemlist/delete",(req, res, next) => {
+//   inventorySchema
+//     .updateOne({ product_id: req.query.product_id }, { $set: { status: false } })
+//     .then((result) => {
+//       res.json({
+//         success: true,
+//         message: "inserted sucessful",
+//         payload: {},
+//       });
+//     })
+//     .catch((e) => {
+//       res.status(400).json({ success: false, message: e.message, payload: {} });
+//     });
+// });
 
 router.post("/stat", async function (req, res, next) {
 
@@ -197,5 +207,27 @@ router.post("/stat", async function (req, res, next) {
   }
 
 });
+
+
+  router.get("/getinventoryitem/:id", async (req, res, next) => {
+  //   const { id } = req.params;
+
+  //  return console.log(id)
+  
+   try {
+     const { id } = req.params;
+     const InventoryProduct = await inventorySchema.findById(id);
+     if (!InventoryProduct) {
+       return res.status(404).json({ message: "Inventory Product not found." });
+     }
+     res.status(200).json(InventoryProduct);
+   } catch (error) {
+     res.status(400).json({ message: error.message });
+   }
+})
+
+
+
+
 
 module.exports = router;

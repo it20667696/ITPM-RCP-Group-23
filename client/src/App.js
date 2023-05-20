@@ -18,7 +18,9 @@ import LoginPage from "scenes/LoginPage/LoginPage";
 import UpdateProductPage from "scenes/products/UpdateProductPage";
 import ViewProductPage from "scenes/products/ViewProductPage";
 import AddProductPage from "scenes/products/AddProductPage";
-import AddInventory from "scenes/Inventory/AddInventory"
+import AddInventory from "scenes/Inventory/AddInventory";
+import Items from "scenes/Inventory";
+import UpdateInventoryPage from "scenes/Inventory/UpdateItem";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -57,6 +59,11 @@ function App() {
               <Route path="/products/:id/view" element={<ViewProductPage />} />
               <Route path="/addProduct" element={<AddProductPage />} />
               <Route path="/addInventory" element={<AddInventory/>}/>
+              <Route
+                path="/update-inventory/:id"
+                element={<UpdateInventoryPage />}
+              />
+              <Route path="/items" element={<Items/>}/>
             </Route>
           </Routes>
         </ThemeProvider>
