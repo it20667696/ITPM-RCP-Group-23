@@ -30,9 +30,14 @@ const Supplier_Dash = () => {
   };
 
   const paragraphContainerStyle = {
-    width: '60%',
+    width: '60%', //  width to 80%
     textAlign: 'center',
-  };
+    padding: '200px', // Increased padding for vertical spacing
+    margin: '100px', // Increased margin for vertical spacing
+    boxShadow: '0 6px 10px rgba(0, 0, 0, 0.2)',
+    borderRadius: '15px',
+    
+    };
 
   const paragraphStyle = {
     fontSize: '18px',
@@ -42,7 +47,7 @@ const Supplier_Dash = () => {
   return (
     <div style={containerStyle}>
       <div style={buttonContainerStyle}>
-        <div style={{ width: '33.33%',margin: '20px 100px 100px 20px' }}>
+        <div style={{ width: '33.33%', margin: '20px 100px 100px 20px' }}>
           <button style={buttonStyle}>Button 1</button>
         </div>
         <div style={{ width: '33.33%', margin: '20px 100px 100px 20px' }}>
@@ -55,10 +60,16 @@ const Supplier_Dash = () => {
       <div style={paragraphContainerStyle}>
         <p style={paragraphStyle}>
           This is a paragraph of text placed in the container below the buttons.
+          This is a paragraph of text placed in the container below the buttons
+          This is a paragraph of text placed in the container below the buttons
+          This is a paragthe container below the buttons
+          This is a paragraph of text placed in the container below the buttons
+          This is a paragraph of text placed in the container below the buttons
+          This is a paragraph of text placed in 
         </p>
       </div>
     </div>
   );
 };
 
-export default Supplier_Dash ;
+export default Supplier_Dash;

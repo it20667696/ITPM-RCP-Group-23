@@ -1,67 +1,94 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const CreateReq = () => {
   const containerStyle = {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
     height: '100vh',
-    padding: '20px',
+    backgroundColor: '#f9f9f9',
   };
 
-  const formStyle = {
-    display: 'flex',
-    flexDirection: 'column',
+  const formContainerStyle = {
     width: '500px',
     padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    shadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-  };
-
-  const labelStyle = {
-    marginBottom: '5px',
-  };
+    backgroundColor: '#ffffff',
+    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    borderRadius: '15px',  };
 
   const inputStyle = {
-    padding: '10px',
-    marginBottom: '10px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
+    marginBottom: '20px',
+    width: '100%',
   };
 
-  const buttonStyle = {
-    padding: '10px 20px',
-    backgroundColor: '#007bff',
-    color: '#fff',
+  const submitButtonStyle = {
+    padding: '10px',
+    width: '100%',
+    backgroundColor: 'blue',
+    color: '#ffffff',
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
   };
 
   return (
-   
     <div style={containerStyle}>
-        <h1>Register</h1>
-      <form style={formStyle}>
-        <label style={labelStyle}>First Name</label>
-        <input style={inputStyle} type="text" />
+      <div style={formContainerStyle}>
+        <h2>Create Collect Request</h2>
+        <form>
+          <TextField
+            id="outlined-fullName-input"
+            label="Address"
+            type="text"
+            margin="none"
+            style={inputStyle}
+          />
+          <TextField
+            id="outlined-email-input"
+            label="Time"
+            type="time"
+            margin="none"
+            style={inputStyle}
+          />
+          <TextField
+            id="outlined-password-input"
+            label="Date"
+            type="date"
+            margin="none"
+            style={inputStyle}
+          />
+           <TextField
+          id="outlined-number"
+          label="Quantity"
+          type="number"
+          style={inputStyle}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
 
-        <label style={labelStyle}>Last Name</label>
-        <input style={inputStyle} type="text" />
+          <TextField
+            id="outlined-address-input"
+            label="Quality"
+            type="dropdown"
+            margin="none"
+            style={inputStyle}
+          />
 
-        <label style={labelStyle}>Email</label>
-        <input style={inputStyle} type="email" />
-
-        <label style={labelStyle}>Password</label>
-        <input style={inputStyle} type="password" />
-
-        <label style={labelStyle}>Confirm Password</label>
-        <input style={inputStyle} type="password" />
-
-        <button style={buttonStyle}>Register</button>
-      </form>
+          <TextField
+            id="outlined-address-input"
+            label="Address"
+            type="text"
+            margin="none"
+            style={inputStyle}
+          />
+          <button style={submitButtonStyle} type="submit">
+            Create Request
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
