@@ -4,10 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 //Models
-<<<<<<< HEAD
-const userSchema = require("./models/userSchema");
+// const userSchema = require("./models/userSchema");
 const inventorySchema = require("./models/inventorySchema");
-=======
 const userProfileSchema = require("./models/userProfileSchema");
 const UserSchema = require("./models/User");
 const paymentSchema = require("./models/paymentSchema");
@@ -23,7 +21,6 @@ const {
   dataTransaction,
   dataOverallStat,
 } = require("./data/index.js");
->>>>>>> 2fca7cae85b804c7909ec36645544a1cf55fe5e8
 
 require("dotenv").config();
 
@@ -76,24 +73,22 @@ mongoose
     // User.insertMany(dataUser);
   });
 
-mongoose.connection.once("open", () => {
-<<<<<<< HEAD
-    console.log("MongoDB Connected");
-});
+
 
 //Routes
-const userRouter = require("./routes/UserRouter.js");
+// const userRouter = require("./routes/UserRouter.js");
 const inventoryRouter = require("./routes/InventoryRouter.js");
 
 //app use
-app.use("/user", userRouter);
+// app.use("/user", userRouter);
 app.use("/inventory", inventoryRouter);
 
-
-
-app.listen(port, () => {
-    console.log("Server is starting on port " + port);
-=======
-  console.log("MongoDB Connected");
->>>>>>> 2fca7cae85b804c7909ec36645544a1cf55fe5e8
+mongoose.connection.once("open", () => {
+    console.log("MongoDB Connected");
 });
+
+
+// app.listen(port, () => {
+//     console.log("Server is starting on port " + port);
+//   console.log("MongoDB Connected");
+// });
