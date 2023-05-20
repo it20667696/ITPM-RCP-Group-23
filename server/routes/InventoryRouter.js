@@ -128,74 +128,74 @@ router.post("/updatedetails", (req, res, next) => {
 //     });
 // });
 
-// //incrementing item id
-// router.get("/id",auth, function (req, res, next) {
-//   itemModel
-//     .find()
-//     .sort({ id: -1 })
-//     .limit(1)
-//     .then((id) => {
-//       res.status(200).json({
-//         success: true,
-//         message: "sucessful",
-//         payload: id[0].id + 1,
-//       });
-//     })
-//     .catch((e) => {
-//       res.status(400).json({ success: false, message: e.message, payload: {} });
-//     });
-// });
+//incrementing item id
+router.get("/id", function (req, res, next) {
+  inventorySchema
+    .find()
+    .sort({product_id: -1 })
+    .limit(1)
+    .then((product_id) => {
+      res.status(200).json({
+        success: true,
+        message: "sucessful",
+        payload: product_id[0].product_id + 1,
+      });
+    })
+    .catch((e) => {
+      res.status(400).json({ success: false, message: e.message, payload: {} });
+    });
+});
 
-// router.delete("/itemlist/delete", auth,(req, res, next) => {
-//   itemModel
-//     .updateOne({ id: req.query.id }, { $set: { status: false } })
-//     .then((result) => {
-//       res.json({
-//         success: true,
-//         message: "inserted sucessful",
-//         payload: {},
-//       });
-//     })
-//     .catch((e) => {
-//       res.status(400).json({ success: false, message: e.message, payload: {} });
-//     });
-// });
+router.delete("/itemlist/delete",(req, res, next) => {
+  inventorySchema
+    .updateOne({ product_id: req.query.product_id }, { $set: { status: false } })
+    .then((result) => {
+      res.json({
+        success: true,
+        message: "inserted sucessful",
+        payload: {},
+      });
+    })
+    .catch((e) => {
+      res.status(400).json({ success: false, message: e.message, payload: {} });
+    });
+});
 
-// router.post("/stat", auth, async function (req, res, next) {
+router.post("/stat", async function (req, res, next) {
 
-//   try {
+  try {
 
-//     let inventoryDetails = await itemModel.find({},
+    let inventoryDetails = await itemModel.find({},
 
-//       { item_name: 1, total_quantity: 1, _id: 0 },
+      { item_name: 1, total_quantity: 1, _id: 0 },
 
-//     );
+    );
     
 
-//     console.log(inventoryDetails);
+    console.log(inventoryDetails);
 
-//     res.status(200).json({
+    res.status(200).json({
 
-//       success: true,
+      success: true,
 
-//       message: "Successful Retrieval",
+      message: "Successful Retrieval",
 
-//       payload: inventoryDetails,
+      payload: inventoryDetails,
 
-//     });
+    });
 
-//   } catch (error) {
+  } catch (error) {
 
-//     res.status(400).json({
+    res.status(400).json({
 
-//       success: false,
+      success: false,
 
-//       message: error.message,
+      message: error.message,
 
-//     });
+    });
 
-//   }
+  }
 
-// });
+});
 
 module.exports = router;
