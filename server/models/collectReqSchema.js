@@ -12,10 +12,14 @@ const collectReqSchema = new mongoose.Schema({
     },
 
 
-    address: {
-        type: Number,
+    name: {
+        type: String,
         required: true,
     },  
+    contact: {
+        type: String,
+        required: true,
+    }, 
 
     
     address: {
@@ -35,10 +39,28 @@ const collectReqSchema = new mongoose.Schema({
         required: true,
     },
 
-   
+    qty: {
+        type: String,
+        required: true,
+    },
 
 
     quality: {
+        type: String,
+        required: true,
+    },
+
+    material_type: {
+        type: String,
+        required: true,
+    },
+
+    latitude: {
+        type: String,
+        required: true,
+    },
+
+    longitude : {
         type: String,
         required: true,
     },
@@ -48,6 +70,8 @@ const collectReqSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
+    
 });
 
 const collectReq = new mongoose.model("CollectReq", collectReqSchema);

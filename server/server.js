@@ -12,6 +12,7 @@ const productStatSchema = require("./models/ProductStatSchema");
 const transactionSchema = require("./models/Transaction");
 const overallStatSchema = require("./models/OverallStat");
 const userLoginSchema = require("./models/UserLoginSchema");
+const CollectReqSchema = require("./models/collectReqSchema");
 const {
   dataUser,
   dataProduct,
@@ -37,6 +38,7 @@ const salesRoutes = require("./routes/sales.js");
 const managementRoutes = require("./routes/management.js");
 const generalRoutes = require("./routes/general.js");
 const userLoginRouter = require("./routes/userLoginRouter");
+const CollectReqRouter = require("./routes/CollectReqRouter");
 
 //app use
 app.use("/client", clientRoutes);
@@ -46,6 +48,7 @@ app.use("/sales", salesRoutes);
 app.use("/management", managementRoutes);
 app.use("/general", generalRoutes);
 app.use("/login", userLoginRouter);
+app.use("/collectreq", CollectReqRouter);
 
 //Start the server
 //define the port for server

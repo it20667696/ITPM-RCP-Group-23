@@ -15,6 +15,7 @@ import LoginPage from "scenes/LoginPage/LoginPage";
 import SelectSup from "scenes/suppliers/select_sup";
 import Supplier_Dash from "scenes/suppliers/supplier_dash";
 import CreateReq from "scenes/suppliers/create_req";
+import MyRequests from "scenes/suppliers/my_requests";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -40,6 +41,7 @@ function App() {
               <Route path="/selectsup" element={<SelectSup />} />
               <Route path="/supplierdash" element={<Supplier_Dash />} />
               <Route path="/createreq" element={<CreateReq />} />
+              <Route path="/myrequsts" element={<MyRequests />} />
             </Route>
           </Routes>
         </ThemeProvider>
