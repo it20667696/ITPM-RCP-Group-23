@@ -83,6 +83,16 @@ export const api = createApi({
       providesTags: (result, error, id) => [{ type: "Transactions", id }],
     }),
 
+    getItems: build.query({
+      query: () => "inventory/getallitems",
+      providesTags: ["Items"],
+    }),
+    getItemsById: build.query({
+      query: (id) => `inventory/getinventoryitem/${id}`,
+      providesTags: (result, error, id) => [{ type: "Items", id }],
+    }),
+    
+
     createProduct: build.mutation({
       query: (newProduct) => ({
         url: "client/addProduct",
@@ -117,7 +127,13 @@ export const api = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
-
+    deleteItem: build.mutation({
+      query: (id) => ({
+        url: `inventory/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Item"],
+    }),
     deleteCustomer: build.mutation({
       query: (id) => ({
         url: `client/deleteCustomer/${id}`,
@@ -143,6 +159,14 @@ export const api = createApi({
         body: updatedProduct,
       }),
       invalidatesTags: ["Products"],
+    }),
+    updateItem: build.mutation({
+      query: ({ id, updatedItem }) => ({
+        url: `inventory/updatedetails/${id}`,
+        method: "POST",
+        body: updatedItem,
+      }),
+      invalidatesTags: ["Item"],
     }),
 
     updateCustomer: build.mutation({
@@ -189,6 +213,23 @@ export const api = createApi({
       }),
       invalidatesTags: ["Transactions"],
     }),
+
+    createItem: build.mutation({
+      query: (newItem) => ({
+        url: "/inventory/item",
+        method: "POST",
+        body: newItem,
+      }),
+      invalidatesTags: ["Items"],
+    }),
+    getInventoryItem: build.mutation({
+      query: (newItem) => ({
+        url: "/inventory/getinventoryitem",
+        method: "GET",
+        body: newItem,
+      }),
+      invalidatesTags: ["InventoryItems"],
+    }),
   }),
 });
 
@@ -204,16 +245,22 @@ export const {
   useGetProductByIdQuery,
   useGetCustomerByIdQuery,
   useGetTransactionByIdQuery,
+  useGetItemsQuery,
+  useGetItemsByIdQuery,
   useCreateProductMutation,
   useCreateCustomerMutation,
   useCreateTransactionMutation,
   useDeleteProductMutation,
+  useDeleteItemMutation,
   useDeleteCustomerMutation,
   useDeleteTransactionMutation,
   useUpdateProductMutation,
+  useUpdateItemMutation,
   useUpdateCustomerMutation,
   useUpdateTransactionMutation,
   usePatchProductMutation,
   usePatchCustomerMutation,
   usePatchTransactionMutation,
+  useCreateItemMutation,
+  
 } = api;
