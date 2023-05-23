@@ -9,6 +9,9 @@ const ViewProductPage = () => {
   const { data, isLoading } = useGetProductByIdQuery(id);
   const navigate = useNavigate();
 
+
+
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -18,6 +21,9 @@ const ViewProductPage = () => {
   }
 
   const { name, price, description, category, rating, supply } = data;
+
+
+ 
 
   const handleCancel = () => {
     navigate("/products");

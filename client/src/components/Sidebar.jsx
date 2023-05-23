@@ -65,6 +65,10 @@ const navItems = [
     icon: null,
   },
   {
+    text: "Items",
+    icon: <Inventory2Outlined />,
+  },
+  {
     text: "Stocks",
     icon: <Inventory2Outlined />,
   },

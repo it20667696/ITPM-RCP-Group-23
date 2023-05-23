@@ -4,6 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 //Models
+// const userSchema = require("./models/userSchema");
+const inventorySchema = require("./models/inventorySchema");
 const userProfileSchema = require("./models/userProfileSchema");
 const UserSchema = require("./models/User");
 const paymentSchema = require("./models/paymentSchema");
@@ -71,6 +73,22 @@ mongoose
     // User.insertMany(dataUser);
   });
 
+
+
+//Routes
+// const userRouter = require("./routes/UserRouter.js");
+const inventoryRouter = require("./routes/InventoryRouter.js");
+
+//app use
+// app.use("/user", userRouter);
+app.use("/inventory", inventoryRouter);
+
 mongoose.connection.once("open", () => {
-  console.log("MongoDB Connected");
+    console.log("MongoDB Connected");
 });
+
+
+// app.listen(port, () => {
+//     console.log("Server is starting on port " + port);
+//   console.log("MongoDB Connected");
+// });
