@@ -19,7 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
 
-const Customers = () => {
+const Users = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetCustomersQuery();
   console.log("data", data);
@@ -69,11 +69,7 @@ const Customers = () => {
       headerCheckboxSelection: true,
       flex: 0.2,
     },
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 1,
-    },
+
     {
       field: "name",
       headerName: "Name",
@@ -96,6 +92,16 @@ const Customers = () => {
       field: "country",
       headerName: "Country",
       flex: 0.4,
+    },
+    {
+      field: "occupation",
+      headerName: "Occupation",
+      flex: 0.6,
+    },
+    {
+      field: "role",
+      headerName: "Role",
+      flex: 0.5,
     },
     {
       field: "action",
@@ -131,7 +137,7 @@ const Customers = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="CUSTOMERS" subtitle="List of Customers" />
+      <Header title="USERS" subtitle="List of Users" />
       <Box
         mt="40px"
         height="75vh"
@@ -170,7 +176,7 @@ const Customers = () => {
             }}
             onClick={handleCreate}
           >
-            Add Customer
+            Add Users
           </Button>
         </Stack>
 
@@ -183,10 +189,10 @@ const Customers = () => {
       </Box>
       <div>
         <Dialog open={open} onClose={handleCloseDialog}>
-          <DialogTitle>Delete Customer</DialogTitle>
+          <DialogTitle>Delete User</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Are you sure you want to delete customer?
+              Are you sure you want to delete users?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -201,4 +207,4 @@ const Customers = () => {
   );
 };
 
-export default Customers;
+export default Users;

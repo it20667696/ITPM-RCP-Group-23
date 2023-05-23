@@ -1,9 +1,12 @@
 import React from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, IconButton } from "@mui/material";
 import { useGetAdminsQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import CustomColumnMenu from "components/DataGridCustomColumnMenu";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const Admin = () => {
   const theme = useTheme();
@@ -47,6 +50,24 @@ const Admin = () => {
       field: "role",
       headerName: "Role",
       flex: 0.5,
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      flex: 0.6,
+      renderCell: (params) => (
+        <div>
+          <IconButton color="success" component="span">
+            <VisibilityIcon />
+          </IconButton>
+          <IconButton color="secondary" component="span">
+            <EditIcon />
+          </IconButton>
+          <IconButton color="error" component="span">
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      ),
     },
   ];
 

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, IconButton } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useGetTransactionsQuery } from "state/api";
 import Header from "components/Header";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const Transactions = () => {
   const theme = useTheme();
@@ -50,6 +53,24 @@ const Transactions = () => {
       headerName: "Cost",
       flex: 1,
       renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      flex: 0.6,
+      renderCell: (params) => (
+        <div>
+          <IconButton color="success" component="span">
+            <VisibilityIcon />
+          </IconButton>
+          <IconButton color="secondary" component="span">
+            <EditIcon />
+          </IconButton>
+          <IconButton color="error" component="span">
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      ),
     },
   ];
 

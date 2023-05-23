@@ -18,6 +18,7 @@ import LoginPage from "scenes/LoginPage/LoginPage";
 import UpdateProductPage from "scenes/products/UpdateProductPage";
 import ViewProductPage from "scenes/products/ViewProductPage";
 import AddProductPage from "scenes/products/AddProductPage";
+import Users from "scenes/users";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -37,6 +38,8 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/users" element={<Users />} />
+
               <Route
                 path="/customers/:id/update"
                 element={<UpdateCustomerPage />}
