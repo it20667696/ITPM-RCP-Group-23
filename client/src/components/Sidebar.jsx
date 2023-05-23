@@ -93,7 +93,7 @@ const navItems = [
     icon: <AdminPanelSettingsOutlined />,
   },
   {
-    text: "User",
+    text: "Users",
     icon: <PersonOutlineOutlined />,
   },
 ];
