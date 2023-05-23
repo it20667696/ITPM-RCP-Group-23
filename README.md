@@ -3,10 +3,10 @@ ITPM-RCP-Group-23
 
 GROUP MEMBERS
 
-D.A.S.A. Jayarathna- IT20601874
-Rahman M.M.J -IT20667696 
-Dassanayake K.D.H.S -IT20654030 
-Damunupola D.A.P.R -IT20664008 
+D.A.S.A. Jayarathna- IT20601874   
+Rahman M.M.J -IT20667696   
+Dassanayake K.D.H.S -IT20654030    
+Damunupola D.A.P.R -IT20664008    
 
 If we don't manage problems due to waste which is increasing day by day, society has to face it's ill consequences. Our team has comeup with a good solution, which is to produce new high quality products from it. Introducing these products to the market would serve as a good income. Moreover, our team will also be bying home-made handicrafts. The suppliers have the opportunity to sell through us.
 
